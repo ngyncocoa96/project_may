@@ -40,7 +40,7 @@ FIELD_LABELS = {
 UPDATE_FIELDS = {
     "airline": [
         "id",
-        "type",
+        #"type", #Should not be able to modify the type
         "company_name"
     ],
     "flight": [

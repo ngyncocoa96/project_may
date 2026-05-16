@@ -2,3 +2,14 @@
 {"id": 2, "type": "airline", "company_name": "Air China"}
 {"id": 3, "type": "client", "name": "Theo", "address_line_1": "", "address_line_2": "", "address_line_3": "", "city": "", "state": "", "zip_code": "", "country": "", "phone_number": ""}
 {"client_id": 3, "airline_id": 2, "type": "flight", "date": "19-09-2026", "start_city": "Rio", "end_city": "Paris", "id": 4}
+{"id": 5, "type": "airline", "company_name": "@gmail"}
+{"id": 6, "type": "airline", "company_name": ""}
+{"id": 7, "type": "Airline", "company_name": ""}
+{"id": 8, "company_name": ""}
+{"id": 9, "type": "Airline", "company_name": "Air China"}
+{"id": 10, "type": "airline", "company_name": ""}
+{"id": 11, "type": "airline", "company_name": "Air France"}
+{"id": 12, "type": "airline", "company_name": "AirFrance"}
+{"id": 13, "type": "airline", "company_name": ""}
+{"id": 14, "type": "airline", "company_name": ""}
+{"id": 15, "type": "airline", "company_name": "!@@##"}

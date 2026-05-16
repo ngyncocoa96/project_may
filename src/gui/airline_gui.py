@@ -23,10 +23,10 @@ class AirlineWindow:
             text="Company Name"
         ).grid(row=2, column=0, padx=10, pady=5)
 
-        tk.Label(
-            self.window,
-            text="Type"
-        ).grid(row=1, column=0, padx=10, pady=5)
+        #tk.Label(
+           # self.window,
+           # text="Type"
+        #).grid(row=1, column=0, padx=10, pady=5)
 
         self.id_entry = tk.Entry(self.window)
 
@@ -39,16 +39,16 @@ class AirlineWindow:
 
         self.id_entry.insert(0, str(get_next_unique_id()))
 
-        self.type_entry = tk.Entry(self.window)
+        #self.type_entry = tk.Entry(self.window)
 
-        self.type_entry.insert(0, AIRLINE)
+        #self.type_entry.insert(0, AIRLINE)
 
-        self.type_entry.grid(
-            row=1,
-            column=1,
-            padx=10,
-            pady=5
-        )
+        #self.type_entry.grid(
+            #row=1,
+            #column=1,
+            #padx=10,
+            #pady=5
+        #)
 
         self.company_entry = tk.Entry(self.window)
 
@@ -75,11 +75,23 @@ class AirlineWindow:
     def save_airline(self):
 
         try:
+            # 1. Get and clean the company name
+            company_name = self.company_entry.get().strip()
 
+            # 2. VALIDATION: Ensure it's not empty
+            if not company_name:
+                raise ValueError("Company Name is required.")
+
+            # 3. VALIDATION: Only letters and spaces allowed
+            # This blocks symbols like & @ # and numbers
+            if not all(char.isalpha() or char.isspace() for char in company_name):
+                raise ValueError("Company Name must only contain letters and spaces.")
+
+            # 4. Construct the record
             record = {
                 "id": int(self.id_entry.get()),
-                "type": self.type_entry.get(),
-                "company_name": self.company_entry.get()
+                "type": "airline", # Forced to airline
+                "company_name": company_name
             }
 
             create_record(record)
