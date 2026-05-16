@@ -206,8 +206,9 @@ class MainWindow:
             if record_type == "client":
 
                 details = (
-                    f"{record.get('city', '')}, "
-                    f"{record.get('country', '')}"
+                    f"{record.get('name', '')}, "
+                    f"{record.get('country', '')}, "
+                    f"{record.get('phone_number', '')}"
                 )
 
             elif record_type == "airline":

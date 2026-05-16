@@ -94,7 +94,7 @@ class FlightWindow:
                 raise ValueError(f"Airline ID {airline_id} do not exist in database.")
             
             record = {
-                "client_id": client_id,    
+                "client_id": client_id,   
                 "airline_id": airline_id,  
                 "type": FLIGHT,
                 "date": date,
