@@ -237,7 +237,7 @@ class MainWindow:
 
     def search_records(self):
 
-        record_id = self.search_entry.get()
+        record_id = self.search_entry.get().strip() #Strip remove the space issues (" 1 " will become "1" for instance)
 
         if not record_id.isdigit():
 
