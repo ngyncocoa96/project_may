@@ -1,1 +1,4 @@
 {"id": 1, "type": "client", "name": "wed333", "address_line_1": "", "address_line_2": "", "address_line_3": "", "city": "", "state": "", "zip_code": "", "country": "", "phone_number": ""}
+{"id": 2, "type": "airline", "company_name": "Air China"}
+{"id": 3, "type": "client", "name": "Theo", "address_line_1": "", "address_line_2": "", "address_line_3": "", "city": "", "state": "", "zip_code": "", "country": "", "phone_number": ""}
+{"client_id": 3, "airline_id": 2, "type": "flight", "date": "19-09-2026", "start_city": "Rio", "end_city": "Paris", "id": 4}

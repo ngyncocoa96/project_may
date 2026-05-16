@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 
-from data.record_manager import create_record
+from data.record_manager import create_record, search_record
 from data.validators import validate_date
 from conf.constants import FLIGHT
 
@@ -66,19 +66,42 @@ class FlightWindow:
 
         try:
 
+            # Get the IDs
+            raw_client_id = self.entries["Client ID"].get().strip()
+            raw_airline_id = self.entries["Airline ID"].get().strip()
+            date = self.entries["Date (DD-MM-YYYY)"].get().strip()
+
+            #Verify empty inputs
+            if not raw_client_id or not raw_airline_id or not date:
+                raise ValueError("Client ID, Airline ID and Date are required.")
+
+            client_id = int(raw_client_id)
+            airline_id = int(raw_airline_id)
+
             date = self.entries["Date (DD-MM-YYYY)"].get()
 
             if not validate_date(date):
                 raise ValueError("Date must be in DD-MM-YYYY format")
 
+            #Checks if client exist
+            client_record = search_record(client_id)
+            if not client_record or client_record.get("type") != "client":
+                raise ValueError(f"Client ID {client_id} do not exist in database.")
+
+            #Checks if the company exist
+            airline_record = search_record(airline_id)
+            if not airline_record or airline_record.get("type") != "airline":
+                raise ValueError(f"Airline ID {airline_id} do not exist in database.")
+            
             record = {
-                "client_id": int(self.entries["Client ID"].get()),
-                "airline_id": int(self.entries["Airline ID"].get()),
+                "client_id": client_id,    
+                "airline_id": airline_id,  
                 "type": FLIGHT,
                 "date": date,
-                "start_city": self.entries["Start City"].get(),
-                "end_city": self.entries["End City"].get()
+                "start_city": self.entries["Start City"].get().strip(),
+                "end_city": self.entries["End City"].get().strip()
             }
+
 
             create_record(record)
 

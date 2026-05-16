@@ -456,6 +456,18 @@ class MainWindow:
 
                         return
 
+                if key == "client_id": 
+                    target = search_record(value)
+                    if not target or target.get("type") != "client":
+                        messagebox.showerror("Error", f"Client ID {value} does not exist.")
+                        return
+                    
+                if key == "airline_id":
+                    target = search_record(value)
+                    if not target or target.get("type") != "airline":
+                        messagebox.showerror("Error", f"Airline ID {value} does not exist.")
+                        return
+
                 if key == "date" and not validate_date(value):
 
                     messagebox.showerror(
