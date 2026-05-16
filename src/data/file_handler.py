@@ -1,7 +1,7 @@
 import json
 import os
 
-from conf.settings import RECORD_FILE
+from src.conf.settings import RECORD_FILE
 
 
 def check_file_exists():
