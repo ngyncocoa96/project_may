@@ -406,6 +406,13 @@ class MainWindow:
             for key, entry in entries.items():
                 value = entry.get().strip()
 
+                # Fixed type line, can now only be one of those three values
+                if key == "type":
+                    allowed_types = ["client", "airline", "flight"]
+                    if value not in allowed_types:
+                        messagebox.showerror("Error", f"Type must be one of: {', '.join(allowed_types)}")
+                        return
+
                 #  Force ID to be an integer
                 if key in ["id", "client_id", "airline_id"]:
                     try:
@@ -428,7 +435,7 @@ class MainWindow:
                     if value and not re.match(r"^\+?[\d\s\-]+$", value):
                         messagebox.showerror(
                             "Error", 
-                            "Invalid phone number. Use only numbers, spaces, '-' or '+'."
+                            "The phone number is invalid. Please use only numbers, spaces, '-' or '+'."
                         )
                         return
 
