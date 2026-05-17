@@ -1,3 +1,5 @@
-{"id": 1, "type": "client", "name": "theo", "address_line_1": "", "address_line_2": "", "address_line_3": "", "city": "paris", "state": "", "zip_code": "", "country": "France", "phone_number": "+333333333333"}
-{"id": 2, "type": "airline", "company_name": "Air China"}
-{"client_id": 1, "airline_id": 2, "type": "flight", "date": "19-09-1996", "start_city": "90", "end_city": "91", "id": 3}
+{"id": 1, "type": "airline", "name": "Theo", "address_line_1": "", "address_line_2": "", "address_line_3": "", "city": "Paris", "state": "", "zip_code": "", "country": "France", "phone_number": "+3389897877"}
+{"id": 2, "type": "airline", "company_name": "Hello Airline"}
+{"type": "client", "id": 4, "name": "Theo NGUYEN", "address_line_1": "30 avenue des champs elysee", "address_line_2": "", "address_line_3": "", "city": "Paris", "state": "Ile-de-France", "zip_code": "78000", "country": "France", "phone_number": "+3333333333"}
+{"type": "flight", "id": 5, "client_id": 4, "airline_id": 2, "date": "19-09-1996", "start_city": "Paris", "end_city": "Strasbourg"}
+{"id": 6, "type": "airline", "company_name": "CoucouAirline"}
