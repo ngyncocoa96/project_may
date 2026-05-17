@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+import re
 
 from conf.constants import APP_TITLE
 
@@ -352,158 +353,114 @@ class MainWindow:
         return int(values[0])
 
     def open_update_window(self, event=None):
-
+        
+        # Handle double-click event on the Treeview
         if event is not None and event.type == tk.EventType.ButtonPress:
             selected_row = self.tree.identify_row(event.y)
-
             if not selected_row:
                 return
-
             self.tree.selection_set(selected_row)
 
+        # Retrieve the selected record ID
         try:
-
             record_id = self.get_selected_record_id()
-
         except ValueError as error:
-
-            messagebox.showerror(
-                "Error",
-                str(error)
-            )
-
+            messagebox.showerror("Error", str(error))
             return
 
+        # Fetch the record data from the database/file
         record = search_record(record_id)
-
         if not record:
-
-            messagebox.showerror(
-                "Error",
-                "Record not found"
-            )
-
+            messagebox.showerror("Error", "Record not found")
             return
 
+        # Create the pop-up window
         update_window = tk.Toplevel(self.root)
-
         update_window.title("Update Record")
 
         entries = {}
-
         row_index = 0
-
         record_type = record.get("type")
 
-        fields = UPDATE_FIELDS.get(
-            record_type,
-            list(record.keys())
-        )
+        # Determine which fields to display based on record type
+        fields = UPDATE_FIELDS.get(record_type, list(record.keys()))
 
         for key in fields:
-
             value = record.get(key, "")
+            
+            # Create the label
+            label = tk.Label(update_window, text=FIELD_LABELS.get(key, key))
+            label.grid(row=row_index, column=0, padx=10, pady=5)
 
-            label = tk.Label(
-                update_window,
-                text=FIELD_LABELS.get(key, key)
-            )
-
-            label.grid(
-                row=row_index,
-                column=0,
-                padx=10,
-                pady=5
-            )
-
+            # Create an input field
             entry = tk.Entry(update_window, width=50)
-
             entry.insert(0, str(value))
-
-            entry.grid(
-                row=row_index,
-                column=1,
-                padx=10,
-                pady=5
-            )
-
+            entry.grid(row=row_index, column=1, padx=10, pady=5)
+            
             entries[key] = entry
-
             row_index += 1
 
         def save_updated_record():
-
             updated_record = record.copy()
 
             for key, entry in entries.items():
+                value = entry.get().strip()
 
-                value = entry.get()
-
-                if key in [
-                    "id",
-                    "client_id",
-                    "airline_id"
-                ]:
-
+                #  Force ID to be an integer
+                if key in ["id", "client_id", "airline_id"]:
                     try:
                         value = int(value)
-
                     except ValueError:
-
-                        messagebox.showerror(
-                            "Error",
-                            f"{key} must be an integer"
-                        )
-
+                        messagebox.showerror("Error", f"{FIELD_LABELS.get(key, key)} must be an integer")
                         return
 
+                # Validation of Name, City, Country, State 
+                if key in ["name", "city", "country", "state", "start_city", "end_city"]:
+                    if value and not re.match(r"^[a-zA-ZÀ-ÿ\s\-\']+$", value):
+                        messagebox.showerror(
+                            "Error", 
+                            f"Field '{FIELD_LABELS.get(key, key)}' can only contain letters."
+                        )
+                        return
+
+                # PHONE NUMBER VALIDATION
+                if key == "phone_number":
+                    if value and not re.match(r"^\+?[\d\s\-]+$", value):
+                        messagebox.showerror(
+                            "Error", 
+                            "Invalid phone number. Use only numbers, spaces, '-' or '+'."
+                        )
+                        return
+
+                # DATE VALIDATION (Checks the format)
+                if key == "date" and not validate_date(value):
+                    messagebox.showerror("Error", "Date must be in DD-MM-YYYY format")
+                    return
+
+                # Checks Client ID
                 if key == "client_id": 
                     target = search_record(value)
                     if not target or target.get("type") != "client":
                         messagebox.showerror("Error", f"Client ID {value} does not exist.")
                         return
-                    
+                
+                # Checks airline ID
                 if key == "airline_id":
                     target = search_record(value)
                     if not target or target.get("type") != "airline":
                         messagebox.showerror("Error", f"Airline ID {value} does not exist.")
                         return
 
-                if key == "date" and not validate_date(value):
-
-                    messagebox.showerror(
-                        "Error",
-                        "Date must be in DD-MM-YYYY format"
-                    )
-
-                    return
-
                 updated_record[key] = value
 
+            # Record save management
             try:
-
-                update_record(
-                    record_id,
-                    updated_record
-                )
-
+                update_record(record_id, updated_record)
+                self.refresh_records() # Update the main list
+                update_window.destroy() # Close pop-up
+                messagebox.showinfo("Success", "Record updated successfully")
             except ValueError as error:
-
-                messagebox.showerror(
-                    "Error",
-                    str(error)
-                )
-
-                return
-
-            self.refresh_records()
-
-            update_window.destroy()
-
-            messagebox.showinfo(
-                "Success",
-                "Record updated successfully"
-            )
+                messagebox.showerror("Error", str(error))
 
         tk.Button(
             update_window,
