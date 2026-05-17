@@ -430,7 +430,7 @@ class MainWindow:
                         )
                         return
 
-                # PHONE NUMBER VALIDATION
+                # Phone number validation
                 if key == "phone_number":
                     if value and not re.match(r"^\+?[\d\s\-]+$", value):
                         messagebox.showerror(
@@ -439,7 +439,7 @@ class MainWindow:
                         )
                         return
 
-                # DATE VALIDATION (Checks the format)
+                # Date Validation
                 if key == "date" and not validate_date(value):
                     messagebox.showerror("Error", "Date must be in DD-MM-YYYY format")
                     return
