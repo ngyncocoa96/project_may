@@ -189,7 +189,6 @@ class MainWindow:
                 if date:
                     parts.append(f"Departure date: {date}")
 
-                # Assemblage final
                 details = " ; ".join(parts)
 
             else:
