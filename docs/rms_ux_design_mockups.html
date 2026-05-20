@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RMS UX Design Mockups</title>
+<style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+
+ body {
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 12pt;
+ color: #1a1a1a;
+ background: #f4f4f4;
+ padding: 32px 40px;
+ line-height: 1.5;
+ }
+
+ h1 { font-size: 18pt; margin-bottom: 4px; }
+ h2 { font-size: 14pt; margin: 28px 0 10px; color: #222; }
+ p { margin-bottom: 8px; }
+
+ .subtitle {
+ color: #666;
+ font-size: 10pt;
+ margin-bottom: 22px;
+ }
+
+ .section {
+ background: #fff;
+ border: 1px solid #ddd;
+ border-radius: 8px;
+ padding: 14px 16px;
+ margin-bottom: 18px;
+ }
+
+ .section ul { margin-left: 20px; margin-top: 6px; }
+ .section li { margin-bottom: 4px; }
+
+ .screen-label {
+ font-size: 9pt;
+ font-weight: bold;
+ text-transform: uppercase;
+ letter-spacing: 0.06em;
+ color: #555;
+ margin: 28px 0 6px;
+ }
+
+ .win {
+ background: white;
+ border: 1px solid #bbb;
+ border-radius: 8px;
+ overflow: hidden;
+ margin-bottom: 6px;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+ }
+
+ .titlebar {
+ background: #d9d9d9;
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ padding: 5px 10px;
+ border-bottom: 1px solid #bbb;
+ }
+
+ .dot { width: 10px; height: 10px; border-radius: 50%; }
+ .dot.r { background: #ff5f56; }
+ .dot.y { background: #ffbd2e; }
+ .dot.g { background: #27c93f; }
+
+ .wintitle {
+ font-size: 10pt;
+ color: #444;
+ flex: 1;
+ text-align: center;
+ }
+
+ .win-body {
+ display: flex;
+ min-height: 260px;
+ }
+
+ .sidebar {
+ width: 180px;
+ background: #2b2b2b;
+ padding: 14px 10px;
+ flex-shrink: 0;
+ }
+
+ .sidebar-title {
+ color: white;
+ font-size: 13pt;
+ font-weight: bold;
+ margin-bottom: 14px;
+ text-align: center;
+ }
+
+ .sbtn {
+ font-size: 10pt;
+ padding: 7px 10px;
+ border-radius: 6px;
+ background: #2fa572;
+ color: white;
+ border: none;
+ width: 100%;
+ text-align: left;
+ margin-bottom: 7px;
+ display: block;
+ }
+
+ .sbtn.danger { background: #7a1f1f; }
+
+ .main-area {
+ flex: 1;
+ padding: 10px;
+ background: #f9f9f9;
+ display: flex;
+ flex-direction: column;
+ gap: 8px;
+ }
+
+ .search-bar {
+ display: flex;
+ gap: 8px;
+ align-items: center;
+ }
+
+ .ctk-entry {
+ font-size: 10pt;
+ padding: 5px 10px;
+ border: 1px solid #999;
+ border-radius: 6px;
+ width: 260px;
+ color: #888;
+ }
+
+ .ctk-btn {
+ font-size: 10pt;
+ padding: 5px 14px;
+ border-radius: 6px;
+ background: #2fa572;
+ color: white;
+ border: none;
+ }
+
+ .table-wrap {
+ display: flex;
+ gap: 0;
+ flex: 1;
+ }
+
+ table.rec,
+ table.map {
+ width: 100%;
+ border-collapse: collapse;
+ font-size: 10pt;
+ }
+
+ table.rec { background: white; }
+
+ table.rec th, table.map th {
+ background: #e2e2e2;
+ padding: 5px 8px;
+ text-align: left;
+ border: 1px solid #ccc;
+ font-weight: bold;
+ cursor: pointer;
+ user-select: none;
+ }
+
+ table.rec th .sort-arrow { color: #888; font-size: 8pt; margin-left: 4px; }
+
+ table.rec td, table.map td {
+ padding: 5px 8px;
+ border-bottom: 1px solid #eee;
+ vertical-align: top;
+ }
+
+ table.rec tr.sel td {
+ background: #1f538d;
+ color: white;
+ }
+
+ .scrollbar-mock {
+ width: 12px;
+ background: #e0e0e0;
+ border-left: 1px solid #ccc;
+ border-radius: 0 0 8px 0;
+ position: relative;
+ flex-shrink: 0;
+ }
+
+ .scrollbar-thumb {
+ width: 8px;
+ height: 40px;
+ background: #aaa;
+ border-radius: 4px;
+ margin: 4px auto;
+ }
+
+ .popup {
+ background: white;
+ border: 1px solid #bbb;
+ border-radius: 8px;
+ overflow: hidden;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+ }
+
+ .popbody { padding: 10px 14px; }
+
+ .formrow {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ margin-bottom: 7px;
+ }
+
+ .lbl {
+ font-size: 10pt;
+ width: 130px;
+ text-align: right;
+ flex-shrink: 0;
+ color: #333;
+ }
+
+ .inp {
+ font-size: 10pt;
+ padding: 4px 8px;
+ border: 1px solid #999;
+ border-radius: 5px;
+ flex: 1;
+ }
+
+ .inp.auto {
+ background: #3a3a3a;
+ color: #aaa;
+ border-color: #555;
+ }
+
+ .popfoot {
+ padding: 7px 14px;
+ display: flex;
+ justify-content: center;
+ border-top: 1px solid #ddd;
+ background: #f8f8f8;
+ }
+
+ .tkbtn {
+ font-size: 10pt;
+ padding: 3px 10px;
+ border: 1px solid #999;
+ border-radius: 3px;
+ background: #ececec;
+ color: #222;
+ }
+
+ .ctk-save {
+ font-size: 11pt;
+ padding: 8px 24px;
+ border-radius: 6px;
+ background: #2fa572;
+ color: white;
+ border: none;
+ font-weight: bold;
+ }
+
+ .combo {
+ font-size: 10pt;
+ padding: 4px 8px;
+ border: 1px solid #999;
+ border-radius: 5px;
+ }
+
+ .scroll-area {
+ border: 1px solid #ddd;
+ border-radius: 6px;
+ padding: 8px;
+ background: #fafafa;
+ max-height: 200px;
+ overflow-y: auto;
+ }
+
+ .confirm-box {
+ background: white;
+ border: 1px solid #bbb;
+ border-radius: 8px;
+ padding: 24px;
+ text-align: center;
+ min-width: 240px;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+ }
+
+ .confirm-title { font-weight: bold; font-size: 11pt; margin-bottom: 10px; }
+ .confirm-text { font-size: 10pt; margin-bottom: 16px; color: #333; }
+ .confirm-btns { display: flex; justify-content: center; gap: 12px; }
+ .btn-yes { background: #2fa572; color: white; border: none; padding: 4px 16px; border-radius: 4px; font-size: 10pt; }
+ .btn-no { background: #ececec; color: #222; border: 1px solid #999; padding: 4px 16px; border-radius: 4px; font-size: 10pt; }
+
+ .flexrow { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+
+ .msgbox {
+ background: white;
+ border: 1px solid #bbb;
+ border-radius: 8px;
+ overflow: hidden;
+ min-width: 180px;
+ flex: 1;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+ }
+
+ .msgbody {
+ padding: 16px;
+ text-align: center;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 8px;
+ }
+
+ .msgtext { font-size: 10pt; color: #333; }
+
+ .note {
+ font-size: 9pt;
+ color: #555;
+ margin-bottom: 6px;
+ font-style: italic;
+ }
+
+ .rationale {
+ font-size: 9pt;
+ color: #2fa572;
+ background: #f0faf5;
+ border-left: 3px solid #2fa572;
+ padding: 6px 10px;
+ margin-bottom: 16px;
+ border-radius: 0 4px 4px 0;
+ }
+
+ .new-badge {
+ display: inline-block;
+ font-size: 7pt;
+ background: #2fa572;
+ color: white;
+ padding: 1px 5px;
+ border-radius: 3px;
+ margin-left: 6px;
+ vertical-align: middle;
+ font-weight: bold;
+ letter-spacing: 0.05em;
+ }
+
+ .sort-demo {
+ display: flex;
+ gap: 8px;
+ align-items: center;
+ font-size: 10pt;
+ padding: 8px;
+ background: white;
+ border: 1px solid #ddd;
+ border-radius: 6px;
+ margin-bottom: 6px;
+ }
+
+ .sort-col {
+ padding: 4px 12px;
+ background: #e2e2e2;
+ border: 1px solid #ccc;
+ border-radius: 4px;
+ cursor: pointer;
+ font-size: 10pt;
+ }
+
+ .sort-col.active {
+ background: #2fa572;
+ color: white;
+ border-color: #1e8a5e;
+ }
+
+ .csv-dialog {
+ background: white;
+ border: 1px solid #bbb;
+ border-radius: 8px;
+ padding: 16px 20px;
+ max-width: 380px;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+ }
+
+ .csv-title { font-weight: bold; font-size: 11pt; margin-bottom: 10px; }
+ .csv-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+ .csv-inp { flex: 1; padding: 4px 8px; border: 1px solid #999; border-radius: 4px; font-size: 10pt; }
+ .csv-btns { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>RMS UX Design Mockups</h1>
+<p class="subtitle">Travel Agent Record Management System: Python customtkinter GUI with green light theme</p>
+
+<div class="section">
+ <h2>Overview</h2>
+ <p>These mockups represent the visual layout of the final Travel Agent Record Management System GUI. The interface uses a clear sidebar and main record table so users can create, update, delete, search, sort, refresh, and export records from one central screen.</p>
+ <p>The system supports client, airline, and flight records. The sidebar gives users direct access to the main actions: Add Client, Add Airline, Add Flight, Delete Record, Update Record, and Export to CSV. The main area contains the search bar, Refresh All button, sortable records table, and vertical scrollbar for handling larger record lists.</p>
+</div>
+
+<!-- SCREEN 1 -->
+<div class="screen-label">Screen 1: Main window: sidebar navigation, search bar, sortable records table with scrollbar</div>
+<div class="win">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Travel Agent Record Management System</span>
+ </div>
+
+ <div class="win-body">
+ <div class="sidebar">
+ <div class="sidebar-title">RMS System</div>
+ <button class="sbtn">Add Client</button>
+ <button class="sbtn">Add Airline</button>
+ <button class="sbtn">Add Flight</button>
+ <button class="sbtn danger">Delete Record</button>
+ <button class="sbtn">Update Record</button>
+ <button class="sbtn">Export to CSV</button>
+ </div>
+
+ <div class="main-area">
+ <div class="search-bar">
+ <input class="ctk-entry" value="Search by ID, Name, or Phone number...">
+ <button class="ctk-btn">Search</button>
+ <button class="ctk-btn">Refresh All</button>
+ </div>
+
+ <div class="table-wrap">
+ <table class="rec">
+ <tr>
+ <th style="width:55px">ID <span class="sort-arrow">▲</span></th>
+ <th style="width:80px">Type <span class="sort-arrow">⇅</span></th>
+ <th style="width:160px">Name <span class="sort-arrow">⇅</span></th>
+ <th>Details <span class="sort-arrow">⇅</span></th>
+ </tr>
+ <tr>
+ <td>1</td>
+ <td>airline</td>
+ <td>Sample Airline</td>
+ <td>Airlines company : Sample Airline</td>
+ </tr>
+ <tr class="sel">
+ <td>2</td>
+ <td>client</td>
+ <td>Sample Client</td>
+ <td>Sample City, Sample Country | 000-000-0000</td>
+ </tr>
+ <tr>
+ <td>3</td>
+ <td>flight</td>
+ <td>Start City → End City</td>
+ <td>Mr/Ms: Sample Client (ID #2) ; Airline: Sample Airline (ID #1) ; Departure date: 17-05-2026</td>
+ </tr>
+ <tr>
+ <td>4</td>
+ <td>client</td>
+ <td>Example Client</td>
+ <td>Example City, Example Country | 111-111-1111</td>
+ </tr>
+ </table>
+ <div class="scrollbar-mock"><div class="scrollbar-thumb"></div></div>
+ </div>
+ </div>
+ </div>
+</div>
+<p class="note">
+ The sidebar includes Export to CSV. Column headers show sort arrows, clicking a header sorts that column; clicking again reverses the order. A vertical scrollbar appears on the right of the table. Double-clicking a row opens the Update window.
+</p>
+<div class="rationale">
+ UX rationale: the sidebar keeps all CRUD actions and export permanently visible. The selected row highlight (blue) supports update and delete workflows. The Refresh All button restores the full record list after a search.
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen-label">Screen 2: Create client and create airline popup windows</div>
+<div class="flexrow">
+ <div class="popup" style="flex:1; min-width:280px;">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Create Client Record</span>
+ </div>
+ <div class="popbody">
+ <div class="formrow"><span class="lbl">ID</span><input class="inp" value="5"></div>
+ <div class="formrow"><span class="lbl">Name</span><input class="inp" value="New Client"></div>
+ <div class="formrow"><span class="lbl">Address Line 1</span><input class="inp" value="Address Line 1"></div>
+ <div class="formrow"><span class="lbl">Address Line 2</span><input class="inp" value="Address Line 2"></div>
+ <div class="formrow"><span class="lbl">Address Line 3</span><input class="inp" value=""></div>
+ <div class="formrow"><span class="lbl">City</span><input class="inp" value="Sample City"></div>
+ <div class="formrow"><span class="lbl">State</span><input class="inp" value="Sample State"></div>
+ <div class="formrow"><span class="lbl">Zip Code</span><input class="inp" value="00000"></div>
+ <div class="formrow"><span class="lbl">Country</span><input class="inp" value="Sample Country"></div>
+ <div class="formrow"><span class="lbl">Phone Number</span><input class="inp" value="000-000-0000"></div>
+ </div>
+ <div class="popfoot"><button class="tkbtn">Save Client</button></div>
+ </div>
+
+ <div class="popup" style="flex:1; min-width:200px;">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Create Airline Record</span>
+ </div>
+ <div class="popbody">
+ <div class="formrow"><span class="lbl">ID</span><input class="inp" value="6"></div>
+ <div class="formrow"><span class="lbl">Company Name</span><input class="inp" value="Sample Airline"></div>
+ </div>
+ <div class="popfoot"><button class="tkbtn">Save Airline</button></div>
+ </div>
+</div>
+<p class="note">
+ Client and airline IDs are auto-filled by get_next_unique_id() but remain editable. The Airline Type field is not shown because the code enforces the type internally as "airline". Company Name must contain only letters and spaces.
+</p>
+<div class="rationale">
+ UX rationale: each create form only shows the fields users need. Removing the Airline Type field prevents saving an airline with an incorrect type.
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen-label">Screen 3: Create flight popup window</div>
+<div class="popup" style="max-width:420px;">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Create Flight Record</span>
+ </div>
+ <div class="popbody">
+ <div class="formrow"><span class="lbl">Client ID</span><input class="inp" value="2"></div>
+ <div class="formrow"><span class="lbl">Airline ID</span><input class="inp" value="1"></div>
+ <div class="formrow"><span class="lbl">Date (DD-MM-YYYY)</span><input class="inp" value="17-05-2026"></div>
+ <div class="formrow"><span class="lbl">Start City</span><input class="inp" value="Start City"></div>
+ <div class="formrow"><span class="lbl">End City</span><input class="inp" value="End City"></div>
+ </div>
+ <div class="popfoot"><button class="tkbtn">Save Flight</button></div>
+</div>
+<p class="note">
+ The system validates that Client ID and Airline ID reference existing records of the correct type before saving. The date must follow DD-MM-YYYY format.
+</p>
+<div class="rationale">
+ UX rationale: checking linked IDs prevents orphaned flight records that refer to missing clients or airlines.
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen-label">Screen 4: Update record: type conversion dropdown + scrollable fields (650×800px popup)</div>
+<div class="popup" style="max-width:500px;">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Update Record</span>
+ </div>
+ <div class="popbody">
+ <div class="formrow" style="margin-bottom:12px;">
+ <span class="lbl" style="font-weight:bold;">Convert Record To:</span>
+ <select class="combo">
+ <option>client</option>
+ <option selected>flight</option>
+ <option>airline</option>
+ </select>
+ </div>
+ <div class="scroll-area">
+ <div class="formrow"><span class="lbl">ID</span><input class="inp auto" value="3" readonly></div>
+ <div class="formrow"><span class="lbl">Client ID</span><input class="inp" value="2"></div>
+ <div class="formrow"><span class="lbl">Airline ID</span><input class="inp" value="1"></div>
+ <div class="formrow"><span class="lbl">Date (DD-MM-YYYY)</span><input class="inp" value="17-05-2026"></div>
+ <div class="formrow"><span class="lbl">Start City</span><input class="inp" value="Start City"></div>
+ <div class="formrow"><span class="lbl">End City</span><input class="inp" value="End City"></div>
+ </div>
+ </div>
+ <div class="popfoot"><button class="ctk-save">Save Changes</button></div>
+</div>
+<p class="note">
+ The update window opens as a 650×800px scrollable popup. Changing the dropdown re-renders the correct fields for the selected type. The ID field is locked (grey, read-only). After saving, the main table refreshes automatically and the popup closes.
+</p>
+<div class="rationale">
+ UX rationale: type conversion lets staff correct mis-categorised records without deleting and recreating them. The scrollable area keeps longer forms manageable.
+</div>
+
+<!-- SCREEN 5 -->
+<div class="screen-label">Screen 5: Delete confirmation dialog</div>
+<div style="background:#e8e8e4; padding:30px; border-radius:8px; display:flex; justify-content:center; margin-bottom:6px;">
+ <div class="confirm-box">
+ <div class="confirm-title">Confirm</div>
+ <div class="confirm-text">Delete this record?</div>
+ <div class="confirm-btns">
+ <button class="btn-yes">Yes</button>
+ <button class="btn-no">No</button>
+ </div>
+ </div>
+</div>
+<p class="note">
+ This appears after clicking Delete Record on a selected row. If nothing is selected, an error message appears instead of this dialog.
+</p>
+<div class="rationale">
+ UX rationale: confirmation prevents accidental data loss before a destructive action.
+</div>
+
+<!-- SCREEN 6 -->
+<div class="screen-label">Screen 6: Search result: partial match search (name, company, phone, or exact ID)</div>
+<div class="win">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Travel Agent Record Management System</span>
+ </div>
+ <div class="win-body">
+ <div class="sidebar">
+ <div class="sidebar-title">RMS System</div>
+ <button class="sbtn">Add Client</button>
+ <button class="sbtn">Add Airline</button>
+ <button class="sbtn">Add Flight</button>
+ <button class="sbtn danger">Delete Record</button>
+ <button class="sbtn">Update Record</button>
+ <button class="sbtn">Export to CSV</button>
+ </div>
+ <div class="main-area">
+ <div class="search-bar">
+ <input class="ctk-entry" value="sample" style="color:#1a1a1a;">
+ <button class="ctk-btn">Search</button>
+ <button class="ctk-btn">Refresh All</button>
+ </div>
+ <div class="table-wrap">
+ <table class="rec">
+ <tr>
+ <th style="width:55px">ID <span class="sort-arrow">⇅</span></th>
+ <th style="width:80px">Type <span class="sort-arrow">⇅</span></th>
+ <th style="width:160px">Name <span class="sort-arrow">⇅</span></th>
+ <th>Details <span class="sort-arrow">⇅</span></th>
+ </tr>
+ <tr class="sel">
+ <td>2</td>
+ <td>client</td>
+ <td>Sample Client</td>
+ <td>Sample City, Sample Country | 000-000-0000</td>
+ </tr>
+ <tr>
+ <td>1</td>
+ <td>airline</td>
+ <td>Sample Airline</td>
+ <td>Airlines company : Sample Airline</td>
+ </tr>
+ </table>
+ <div class="scrollbar-mock"><div class="scrollbar-thumb"></div></div>
+ </div>
+ </div>
+ </div>
+</div>
+<p class="note">
+ Search supports partial matching across ID (exact), name, company name, and phone number. The search is case-insensitive. Results are filtered directly in the table. Clicking Refresh All restores all records.
+</p>
+<div class="rationale">
+ UX rationale: partial search reduces friction: users do not need to know exact values. Case-insensitive matching handles inconsistent capitalisation in stored data.
+</div>
+
+<!-- SCREEN 7 -->
+<div class="screen-label">Screen 7: Column sorting: clicking a header sorts the table; clicking again reverses order</div>
+<div class="sort-demo">
+ <span style="font-size:9pt; color:#555;">Click header to sort:</span>
+ <button class="sort-col active">ID ▲</button>
+ <button class="sort-col">Type ⇅</button>
+ <button class="sort-col">Name ⇅</button>
+ <button class="sort-col">Details ⇅</button>
+</div>
+<div class="win" style="margin-bottom:6px;">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Records sorted by ID ascending</span>
+ </div>
+ <div class="win-body" style="min-height:120px;">
+ <div class="main-area" style="padding:8px;">
+ <div class="table-wrap">
+ <table class="rec">
+ <tr>
+ <th style="width:55px">ID <span class="sort-arrow">▲</span></th>
+ <th style="width:80px">Type</th>
+ <th style="width:160px">Name</th>
+ <th>Details</th>
+ </tr>
+ <tr><td>1</td><td>airline</td><td>Sample Airline</td><td>Airlines company : Sample Airline</td></tr>
+ <tr><td>2</td><td>client</td><td>Sample Client</td><td>Sample City, Sample Country | 000-000-0000</td></tr>
+ <tr><td>3</td><td>flight</td><td>Start City → End City</td><td>Mr/Ms: Sample Client (ID #2) ; Departure date: 17-05-2026</td></tr>
+ </table>
+ <div class="scrollbar-mock"><div class="scrollbar-thumb"></div></div>
+ </div>
+ </div>
+ </div>
+</div>
+<p class="note">
+ The ID column sorts numerically. Name and Type columns sort alphabetically. Clicking the same header again toggles descending order.
+</p>
+<div class="rationale">
+ UX rationale: column sorting lets users quickly find records by reordering the table without any additional navigation.
+</div>
+
+<!-- SCREEN 8 -->
+<div class="screen-label">Screen 8: Export to CSV: save dialog and output format</div>
+<div style="background:#e8e8e4; padding:30px; border-radius:8px; display:flex; justify-content:center; margin-bottom:6px;">
+ <div class="csv-dialog">
+ <div class="csv-title">Save As</div>
+ <div class="csv-row">
+ <span style="font-size:10pt; color:#555; width:80px; flex-shrink:0;">File name:</span>
+ <input class="csv-inp" value="records_export.csv">
+ </div>
+ <div class="csv-row">
+ <span style="font-size:10pt; color:#555; width:80px; flex-shrink:0;">Save as type:</span>
+ <input class="csv-inp" value="CSV files (*.csv)" readonly style="background:#f0f0f0;">
+ </div>
+ <div class="csv-btns">
+ <button class="tkbtn">Cancel</button>
+ <button class="btn-yes">Save</button>
+ </div>
+ </div>
+</div>
+<p class="note">
+ Clicking Export to CSV opens a Save As dialog. The output file contains headers: ID, Type, Name, Details. Each visible row in the treeview is written as a CSV row. If the table is empty, a warning appears instead.
+</p>
+<div class="rationale">
+ UX rationale: CSV export makes the current table view portable for reporting and external analysis without requiring database access.
+</div>
+
+<!-- SCREEN 9 -->
+<div class="screen-label">Screen 9: Messagebox feedback dialogs</div>
+<div class="flexrow">
+ <div class="msgbox">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Success</span>
+ </div>
+ <div class="msgbody">
+ <div style="font-size:24pt">✅</div>
+ <div class="msgtext">Record successfully saved as CLIENT.</div>
+ <button class="tkbtn">OK</button>
+ </div>
+ </div>
+
+ <div class="msgbox">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Validation Error</span>
+ </div>
+ <div class="msgbody">
+ <div style="font-size:24pt">⛔</div>
+ <div class="msgtext">The field 'Name' cannot be empty.</div>
+ <button class="tkbtn">OK</button>
+ </div>
+ </div>
+
+ <div class="msgbox">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Format Error</span>
+ </div>
+ <div class="msgbody">
+ <div style="font-size:24pt">⛔</div>
+ <div class="msgtext">Date must follow the format: DD-MM-YYYY</div>
+ <button class="tkbtn">OK</button>
+ </div>
+ </div>
+
+ <div class="msgbox">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Security Error</span>
+ </div>
+ <div class="msgbody">
+ <div style="font-size:24pt">⛔</div>
+ <div class="msgtext">Client ID 99 does not exist.</div>
+ <button class="tkbtn">OK</button>
+ </div>
+ </div>
+
+ <div class="msgbox">
+ <div class="titlebar">
+ <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+ <span class="wintitle">Search Results</span>
+ </div>
+ <div class="msgbody">
+ <div style="font-size:24pt">ℹ️</div>
+ <div class="msgtext">No records found for: 'xyz'</div>
+ <button class="tkbtn">OK</button>
+ </div>
+ </div>
+</div>
+<div class="rationale">
+ UX rationale: messageboxes give users clear, specific feedback for successful actions, validation problems, format errors, missing linked records, search results, export warnings, and system errors.
+</div>
+
+<div class="section">
+ <h2>UX Evaluation Summary</h2>
+ <ul>
+ <li><strong>Clarity:</strong> sidebar labels clearly describe every action, including the Export to CSV button.</li>
+ <li><strong>Consistency:</strong> create and update windows follow the same label-entry-save structure across all record types.</li>
+ <li><strong>Error prevention:</strong> validation checks cover empty fields, date format, letter-only fields, number-only fields, phone format, and database existence for linked IDs.</li>
+ <li><strong>Safety:</strong> delete confirmation and read-only ID field in the update window prevent accidental data loss or identity corruption.</li>
+ <li><strong>Feedback:</strong> messageboxes support user understanding through success, validation, format, security, search, export, and system responses.</li>
+ <li><strong>Efficiency:</strong> double-click to update, Enter key in search, Refresh All, column sorting, and partial search all reduce the number of steps for common tasks.</li>
+ <li><strong>Structure:</strong> the interface keeps user actions organised while maintaining a consistent flow across the main window and popup forms.</li>
+ </ul>
+</div>
+
+<div class="section">
+ <h2>Future UX Improvements</h2>
+ <ul>
+ <li>Show the client name next to Client ID in the Flight form as helper text.</li>
+ <li>Add a status bar at the bottom of the main window showing the total number of loaded records.</li>
+ <li>Consider a filter dropdown to show only clients, airlines, or flights at once.</li>
+ <li>Add a short save-status message or visual indicator after records are created, updated, deleted, or exported.</li>
+ </ul>
+</div>
+
+</body>
+</html>
